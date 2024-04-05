@@ -1,3 +1,22 @@
+This code is a forked version of code for NAT type detection.
+The original project is https://github.com/jselbie/stunserver
+In this code, the client part of the code is modified to achieve a result like below:
+          
+          NAT Type: 2
+          NAT Type: Port Restricted Cone NAT
+          External IP: 106.39.200.254:33254
+          External Port: 33254
+
+A variable is provided to distinguish the type.
+More redundant codes are needed to be deleted for the pure goal of NAT type detection. 
+
+Run: ./stunclient 132.232.100.67
+to try this code interacting with my serevr to see the result. 
+
+
+
+
+
 STUNTMAN - An open source STUN server
 Version 1.2.16
 April 7, 2020
