@@ -1,4 +1,4 @@
-This code is a forked version of code for NAT type detection.
+This code is a forked version for NAT type detection.
 The original project is https://github.com/jselbie/stunserver
 In this code, the client part of the code is modified to achieve a result like below:
           
