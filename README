@@ -1,3 +1,41 @@
+
+
+1. 为了运行代码，首先需要确保服务器已经有了两个IP地址，即用不同的两个ip ping这台服务器的时候能ping通。 这里用IP1 IP2表示，IP1代表原有的那个ip， IP2指代额外添加进去的IP。 
+在有了双IP之后，就需要安装依赖，在UBUNTU和别的linux系统下的安装依赖的代码是：
+  
+Debian/Ubuntu/Mint
+      sudo apt-get install g++
+      sudo apt-get install make
+      sudo apt-get install libboost-dev # For Boost
+      sudo apt-get install libssl-dev # For OpenSSL
+
+  RedHat/Fedora and EC2 Amazon Linux AMI
+      sudo yum groupinstall "Development Tools" # For g++, make, et. al.
+      sudo yum install boost-devel # For Boost
+      sudo yum install openssl-devel # For OpenSSL
+
+2. 代码一共有服务端和客户端两个端， 使用这个代码可以运行服务端。
+./stunserver --ddp --mode full --family 4 --protocol udp --primaryinterface 172.27.0.2 --altinterface 172.27.0.6 --primaryadvertised 132.232.100.67   --altadvertised 43.136.235.8
+          172.27.0.2替换为局域网的原有的IP，  172.27.0.6替换为额外添加的那个局域网IP
+          132.232.100.67替换为原有的公网IP， 43.136.235.8替换为额外添加的公网IP
+
+
+倘若需要编译代码，则进入到目录下后使用make命令 如make -j 4。
+
+3. 在另一台客户端电脑上运行的客户端指令：./stunclient 132.232.100.67(替换为原有的公网IP) 可以对服务器是否已经正常运转进行测试。
+建议在测试完毕后结束上面的服务器进程然后使用
+nohup ./stunserver --ddp --mode full --family 4 --protocol udp --primaryinterface 172.27.0.2 --altinterface 172.27.0.6 --primaryadvertised 132.232.100.67   --altadvertised 43.136.235.8 &
+重新运行，让其运转在后台(需要替换IP)。
+
+
+
+
+--------------------------------------------------------------------
+STUNTMAN - An open source STUN server
+Version 1.2.16
+April 7, 2020
+---------------------------------------------------------
+
 This code is a forked version for NAT type detection.
 The original project is https://github.com/jselbie/stunserver
 In this code, the client part of the code is modified to achieve a result like below:
@@ -12,16 +50,7 @@ More redundant codes are needed to be deleted for the pure goal of NAT type dete
 
 Run: ./stunclient 132.232.100.67
 to try this code interacting with my serevr to see the result. 
-
-
-
-
-
-STUNTMAN - An open source STUN server
-Version 1.2.16
-April 7, 2020
----------------------------------------------------------
-
+------------------------------------------------------------------
 
 Features:
 
